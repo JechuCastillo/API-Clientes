@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController //Declara que esta clase sera un controlador
-@RequiredArgsConstructor //Crea los constructores con los argumentos requeridos (@NonNull)
+@RequiredArgsConstructor //Crea los constructores con los argumentos requeridos (@NonNull o final)
 @RequestMapping("/api/clientes") //Mapea las solicitudes http a la url con este path
 public class ClienteController {
 
@@ -51,6 +52,25 @@ public class ClienteController {
         Cliente clienteActualizado = clienteService.updateDataClient(id, unCliente).orElseThrow(() -> new RuntimeException("Problemas para actualizar la categoria del cliente"));
         return ResponseEntity.ok(clienteActualizado);
     }
+
+    /*QUERYS PERSONALIZADAS*/
+    @GetMapping("/activos")
+    public List<Cliente> getClientsActive(){
+        return clienteService.getClientsActive();
+    }
+
+    @GetMapping("/activos/{id}")
+    public ResponseEntity<Cliente> getClientActiveById(@PathVariable Long id){
+        Cliente aClient= clienteService.getClientActiveById(id).orElseThrow(()-> new RuntimeException("Usuario activo no encontrado"));
+        return ResponseEntity.ok(aClient);
+    }
+
+    @DeleteMapping("/activos/{id}")
+    public ResponseEntity<Void> logicalDelete(@PathVariable Long id){
+        clienteService.logicalDelete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }

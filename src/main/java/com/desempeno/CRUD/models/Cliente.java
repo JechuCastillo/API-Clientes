@@ -10,7 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.ZonedDateTime;
 
-@Entity (name = "crud_client") //Declara que sera una entidad en la BD
+@Entity //Declara que sera una entidad en la BD
 @Data //Getters y Setters
 @NoArgsConstructor //Crea el constructor sin argumentos
 @AllArgsConstructor //Crea constructor con todos los argumentos

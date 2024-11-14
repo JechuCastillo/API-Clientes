@@ -1,0 +1,42 @@
+# Información de la aplicación
+info:
+  app:
+    encoding: '@project.build.sourceEncoding@' # Codificación del proyecto,típicamente UTF-8
+  java:
+    source: '@java.17@' # Versión de Java utilizada en el proyecto
+    target: '@java.17@' # Versión objetivo de Java para la compilación
+app:
+  version: '@0.0.1@' # Versión de la aplicación
+  name: 'Crud Clientes' # Nombre de la aplicación
+
+spring:
+  application:
+    name: 'Crud Clientes' # Nombre de la aplicación Spring
+  main:
+    banner-mode: 'OFF' # Desactiva el banner de inicio de Spring Boot
+  datasource:
+    url: jdbc:mysql://localhost:3306/testdb # URL JDBC de la base de datos MySQL
+    username: usuario_app # Usuario de la base de datos
+    password: password # Contraseña de la base de datos
+    driver-class-name: com.mysql.cj.jdbc.Driver # Clase del controlador JDBC de MySQL
+    initialization-mode: always # Siempre inicializa la base de datos con los scripts
+  jpa:
+    show-sql: true # Muestra las sentencias SQL en la consola
+    open-in-view: false # Desactiva Open Session in View para evitar problemas de lazy loading
+    hibernate:
+      ddl-auto: update # Actualiza el esquema de la base de datos automáticamente
+
+  sql:
+    init:
+      mode: always # Siempre inicializa la base de datos con los scripts
+      platform: mysql # Especifica la plataforma de la base de datos
+      schema-locations: classpath:schema.sql # Ruta al script de creación de esquema
+      data-locations: classpath:data.sql # Ruta al script de datos de ejemplo
+server:
+  port: 8089 # Puerto en el que se ejecutará el servidor
+  compression:
+    enabled: true # Habilita la compresión de las respuestas HTTP
+  user:
+  timezone: 'UTC' # Establece la zona horaria predeterminada de la aplicación
+logging:
+  config: classpath:log4j2.xml # Ruta al archivo de configuración de Log4j2

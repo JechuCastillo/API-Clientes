@@ -9,9 +9,12 @@ public interface ClienteService {
 
     //Métodos que debe implementar la clase que implemente.
     List<Cliente> getClients();
+    List<Cliente> getClientsActive();
     Optional<Cliente> getClientById(Long id);
     Optional<Cliente> createClient(Cliente unCliente);
     void deleteClient(Long id);
     Optional<Cliente> updateClient(Long id,Cliente unCliente);
     Optional<Cliente> updateDataClient(Long id,Cliente unCliente);
+    Optional<Cliente> getClientActiveById(Long id);
+    void logicalDelete(Long id);
 }

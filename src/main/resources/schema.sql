@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS crud_clientes(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    password VARCHAR(32) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    dni VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR (255) UNIQUE NOT NULL,
+    category VARCHAR(1) NOT NULL,
+    is_active BIT DEFAULT TRUE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    version INT DEFAULT 0
+);

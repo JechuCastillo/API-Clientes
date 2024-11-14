@@ -64,6 +64,8 @@ public class ClienteServiceImpl implements ClienteService {
             nuevoCliente.setPassword(unCliente.getPassword());
             nuevoCliente.setLastName(unCliente.getLastName());
             nuevoCliente.setCategory(unCliente.getCategory());
+            nuevoCliente.setEmail(unCliente.getEmail());
+            nuevoCliente.setDni(unCliente.getDni());
             nuevoCliente.setUpdatedAt(ZonedDateTime.now());
             return Optional.of(clienteRepository.save(nuevoCliente));
         } else {
@@ -74,19 +76,34 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Optional<Cliente> updateDataClient(Long id, Cliente unCliente) {
         //PATCH
-        Optional clienteDesactualizado = clienteRepository.findById(id);
+        Optional<Cliente> clienteDesactualizado = clienteRepository.findById(id);
 
         if (clienteDesactualizado.isPresent()) {
-            Cliente actualizar = (Cliente) clienteDesactualizado.get();
-            actualizar.setCategory(unCliente.getCategory());
-            actualizar.setUpdatedAt(ZonedDateTime.now());
-            return Optional.of(clienteRepository.save(actualizar));
+            Cliente actualizarCliente = clienteDesactualizado.get();
+            actualizarCliente.setCategory(unCliente.getCategory());
+            actualizarCliente.setUpdatedAt(ZonedDateTime.now());
+            return Optional.of(clienteRepository.save(actualizarCliente));
         } else {
             return Optional.empty();
         }
     }
 
+    public List<Cliente> getClientsActive(){
+        return clienteRepository.getClientsActive();
+    }
+    public Optional<Cliente> getClientActiveById(Long id){
+        return clienteRepository.getClientActiveById(id);
+    }
 
+    public void logicalDelete(Long id){
+        Optional<Cliente> aClient = clienteRepository.getClientActiveById(id);
+        if(aClient.isPresent()){
+            Cliente borrarCliente = aClient.get();
+            borrarCliente.setActive(false);
+            borrarCliente.setUpdatedAt(ZonedDateTime.now());
+            clienteRepository.save(borrarCliente);
+        }
+    }
 }
 
 
