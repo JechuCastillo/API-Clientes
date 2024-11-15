@@ -32,6 +32,13 @@ spring:
       platform: mysql # Especifica la plataforma de la base de datos
       schema-locations: classpath:schema.sql # Ruta al script de creación de esquema
       data-locations: classpath:data.sql # Ruta al script de datos de ejemplo
+
+  doc:
+    swagger-ui:
+      path: /swagger-ui/index.html #Ruta al swagger ui
+      enabled: true     #Habilita swagger ui
+
+
 server:
   port: 8089 # Puerto en el que se ejecutará el servidor
   compression:
