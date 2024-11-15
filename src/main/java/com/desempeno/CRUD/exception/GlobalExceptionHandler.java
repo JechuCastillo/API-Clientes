@@ -14,8 +14,10 @@ import java.util.Date;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    //Atrapa los errores NotFounException
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<GenericResponse>handleClientNotFoundException(NotFoundException e, WebRequest request){
+    public ResponseEntity<GenericResponse>handleClientNotFoundException(NotFoundException e, WebRequest request){ //NotFound creado por mi y Request para obtener la uri
+        //Log para la consola que hubo un error
         log.error("NotFoundException: {}",e.getMessage());
         GenericResponse errorDetails = new GenericResponse(HttpStatus.NOT_FOUND.value(),new Date(),e.getMessage(),request.getDescription(false));
         return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);

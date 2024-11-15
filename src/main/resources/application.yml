@@ -35,12 +35,12 @@ spring:
 
   doc:
     swagger-ui:
-      path: /swagger-ui/index.html #Ruta al swagger ui
+      path: /swagger-ui/index.html #Ruta al swagger ui, genera la ui para probar la aplicacion
       enabled: true     #Habilita swagger ui
 
 
 server:
-  port: 8089 # Puerto en el que se ejecutará el servidor
+  port: 8089 # Puerto en el que se ejecutará el servidor de nuestra aplicacion
   compression:
     enabled: true # Habilita la compresión de las respuestas HTTP
   user:

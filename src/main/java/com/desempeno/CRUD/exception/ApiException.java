@@ -13,6 +13,7 @@ public class ApiException extends RuntimeException {
     private HttpStatus httpStatus;
     private String code;
     public ApiException(HttpStatus httpStatus,String code,String message) {
+        //Hereda el mensaje de RunTimeException para usarlo en caso de que no use el de CodigoError
         super(message);
         this.httpStatus=httpStatus;
         this.code=code;

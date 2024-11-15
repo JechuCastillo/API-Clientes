@@ -10,12 +10,12 @@ import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration //Establece que esta clase se utilizara para Configuracion, no permite usar lombok
 public class OpenApiConfiguration {
-    @Autowired(required = false)
-    private BuildProperties buildProperties;
+    @Autowired(required = false) //Permite la inyeccion de dependencias como en lombok
+    private BuildProperties buildProperties; //Esto vendria de aplicationproperties
 
-    @Bean
+    @Bean //Declara que sera un objeto que podremos gestionar con Spring
     public OpenAPI customOpenAPI() {
         String title = (buildProperties != null) ? String.format("%s.%s", buildProperties.getGroup(), buildProperties.getName()) : "CRUD CLIENTES V2";
         String version = (buildProperties != null) ? buildProperties.getVersion() : "1.0.0";
