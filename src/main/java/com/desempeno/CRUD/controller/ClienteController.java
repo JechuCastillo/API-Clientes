@@ -39,6 +39,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> createClient(@RequestBody Cliente unCliente) {
         Cliente nuevoCliente = clienteService.createClient(unCliente).orElseThrow(() -> new NotFoundException(CodigoError.CLIENTE_NO_PUDO_SER_CREADO.getCode(),
                 CodigoError.CLIENTE_NO_PUDO_SER_CREADO.getDescription(unCliente.getEmail())));
+        log.info("El cliente con email {} fue creado con exito",unCliente.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoCliente);
     }
 
@@ -50,7 +51,9 @@ public class ClienteController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> updateClient(@PathVariable Long id, @RequestBody Cliente unCliente) {
-        Cliente clienteActualizado = clienteService.updateClient(id, unCliente).orElseThrow(() -> new NotFoundException(CodigoError.CLIENTE_NO_PUDO_SER_ACTUALIZADO.getCode(), CodigoError.CLIENTE_NO_ENCONTRADO.getDescription(id)));
+        Cliente clienteActualizado = clienteService.updateClient(id, unCliente).orElseThrow(() -> new NotFoundException(CodigoError.CLIENTE_NO_PUDO_SER_ACTUALIZADO.getCode(),
+                CodigoError.CLIENTE_NO_ENCONTRADO.getDescription(id)));
+        log.info("El cliente con id {} fue actualizado con exito",id);
         return ResponseEntity.ok(clienteActualizado);
     }
 
@@ -58,6 +61,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> updateCategory(@PathVariable Long id, @RequestBody Cliente unCliente) {
         Cliente clienteActualizado = clienteService.updateDataClient(id, unCliente).orElseThrow(() -> new NotFoundException(CodigoError.CATEGORIA_DE_CLIENTE_NO_PUDO_SER_ACTUALIZADO.getCode(),
                 CodigoError.CATEGORIA_DE_CLIENTE_NO_PUDO_SER_ACTUALIZADO.getDescription(id)));
+        log.info("Se actualizo la categoría del cliente con id {} exitosamente",id);
         return ResponseEntity.ok(clienteActualizado);
     }
 
@@ -71,6 +75,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> getClientActiveById(@PathVariable Long id){
         Cliente aClient= clienteService.getClientActiveById(id).orElseThrow(()-> new NotFoundException(CodigoError.CLIENTE_ACTIVO_POR_ID_NO_ENCONTRADO.getCode(),
                 CodigoError.CLIENTE_ACTIVO_POR_ID_NO_ENCONTRADO.getDescription(id)));
+        log.info("El cliente con id {} es: {}",id,aClient);
         return ResponseEntity.ok(aClient);
     }
 
